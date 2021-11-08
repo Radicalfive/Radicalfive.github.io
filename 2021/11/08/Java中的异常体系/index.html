@@ -1,0 +1,453 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>如困兽之斗</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  
+    <meta name="keywords" content="radical,radical's Blog" />
+  
+  <meta name="description" content="Java中的异常体系在开发过程中难免会遇到各种各样的异常，如何处理异常直接影响城西或系统的稳定性，有时在线上仅仅忘记处理一个空指针异常都有可能引起整个项目的崩溃，所以了解开发中的异常是至关重要的！ 概念异常通常是指某个方法不能按照正确的方式完成时，可以通过抛出异常的方式退出该方法，在异常中封装了方法执行过程中的错误信息及原因，然后调用方在获取该异常后可根据业务的情况选择处理异常或者继续抛出该异常。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="如困兽之斗">
+<meta property="og:url" content="https://radicalfive.github.io/2021/11/08/Java%E4%B8%AD%E7%9A%84%E5%BC%82%E5%B8%B8%E4%BD%93%E7%B3%BB/">
+<meta property="og:site_name" content="如困兽之斗">
+<meta property="og:description" content="Java中的异常体系在开发过程中难免会遇到各种各样的异常，如何处理异常直接影响城西或系统的稳定性，有时在线上仅仅忘记处理一个空指针异常都有可能引起整个项目的崩溃，所以了解开发中的异常是至关重要的！ 概念异常通常是指某个方法不能按照正确的方式完成时，可以通过抛出异常的方式退出该方法，在异常中封装了方法执行过程中的错误信息及原因，然后调用方在获取该异常后可根据业务的情况选择处理异常或者继续抛出该异常。">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://files.mdnice.com/user/20622/84adc4da-f4d2-4d46-a9c8-ca3bba883895.png">
+<meta property="og:image" content="https://files.mdnice.com/user/20622/97a026e2-2ce4-4b32-a2f5-216d7b1ee61d.png">
+<meta property="article:published_time" content="2021-11-08T00:26:52.320Z">
+<meta property="article:modified_time" content="2021-11-08T00:26:59.622Z">
+<meta property="article:author" content="Radical">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://files.mdnice.com/user/20622/84adc4da-f4d2-4d46-a9c8-ca3bba883895.png">
+  
+  
+    <link rel="icon" href="/favicon.ico">
+  
+  <link href="//cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+<script src="/js/pace.min.js"></script>
+
+  
+
+  
+  
+
+<meta name="generator" content="Hexo 5.4.0"></head>
+
+<body>
+  <div id="container">
+      <header id="header">
+    <div id="banner"></div>
+    <div id="header-outer">
+        <div id="header-menu" class="header-menu-pos animated">
+            <div class="header-menu-container">
+                <a href="/" class="left">
+                    <span class="site-title">radical&#39;s Blog</span>
+                </a>
+                <nav id="header-menu-nav" class="right">
+                    
+                    <a  href="/">
+                        <i class="fa fa-home"></i>
+                        <span>Home</span>
+                    </a>
+                    
+                    <a  href="/archives">
+                        <i class="fa fa-archive"></i>
+                        <span>Archives</span>
+                    </a>
+                    
+                    <a  href="/about">
+                        <i class="fa fa-user"></i>
+                        <span>About</span>
+                    </a>
+                    
+                </nav>
+                <a class="mobile-header-menu-button">
+                    <i class="fa fa-bars"></i>
+                </a>
+            </div>
+        </div>
+        <div id="header-row">
+            <div id="logo">
+                <a href="/">
+                    <img src="/images/logo.png" alt="logo">
+                </a>
+            </div>
+            <div class="header-info">
+                <div id="header-title">
+                    
+                    <h2>
+                        radical&#39;s Blog
+                    </h2>
+                    
+                </div>
+                <div id="header-description">
+                    
+                    <h3>
+                        且将新火试新茶 诗酒趁年华
+                    </h3>
+                    
+                </div>
+            </div>
+            <nav class="header-nav">
+                <div class="social">
+                    
+                        <a title="radical" target="_blank" href="//radical.com">
+                            <i class="fa fa-home fa-2x"></i></a>
+                    
+                        <a title="Github" target="_blank" href="//github.com/wongminho">
+                            <i class="fa fa-github fa-2x"></i></a>
+                    
+                        <a title="Weibo"  target="_blank" rel="noopener" href="//weibo.com/WongMinHo">
+                            <i class="fa fa-weibo fa-2x"></i></a>
+                    
+                        <a title="Twitter"  target="_blank" rel="noopener" href="//twitter.com/huangminhow">
+                            <i class="fa fa-twitter fa-2x"></i></a>
+                    
+                        <a   ">
+                            <i class="fa fa-qq fa-2x"></i></a>
+                    
+                        <a   ">
+                            <i class="fa fa-weixin fa-2x"></i></a>
+                    
+                </div>
+            </nav>
+        </div>
+    </div>
+</header>
+      <div class="outer">
+        <section id="main" class="body-wrap"><article id="post-Java中的异常体系" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+    <div class="article-entry post-content" itemprop="articleBody">
+      
+            
+            <h1 id="Java中的异常体系"><a href="#Java中的异常体系" class="headerlink" title="Java中的异常体系"></a>Java中的异常体系</h1><p>在开发过程中难免会遇到各种各样的异常，如何处理异常直接影响城西或系统的稳定性，有时在线上仅仅忘记处理一个空指针异常都有可能引起整个项目的崩溃，所以了解开发中的异常是至关重要的！</p>
+<h2 id="概念"><a href="#概念" class="headerlink" title="概念"></a>概念</h2><p><strong>异常</strong>通常是指某个方法不能按照正确的方式完成时，可以通过<strong>抛出异常</strong>的方式退出该方法，在异常中封装了方法执行过程中的错误信息及原因，然后调用方在获取该异常后可根据业务的情况选择处理异常或者继续抛出该异常。</p>
+<p>在方法执行过程中出现异常时，<strong>Java异常处理</strong>机制会将代码的执行权交给异常处理其，异常处理器根据在系统中定义的异常处理规则执行不同的异常处理逻辑（抛出异常或捕捉处理异常）</p>
+<h2 id="异常分类"><a href="#异常分类" class="headerlink" title="异常分类"></a>异常分类</h2><p>在Java中，<strong>Throwable</strong>是所有错误或异常的父类，又可以分为<strong>Error</strong>和<strong>Exception</strong>，常见的如下图所示。<br><img src="https://files.mdnice.com/user/20622/84adc4da-f4d2-4d46-a9c8-ca3bba883895.png"><br><strong>Error</strong> 指Java程序运行错误，如果程序在启动时出现Error，则启动失败；如果程序运行过程中出现Error，则系统将退出程序。出现Error是系统的内部错误或资源耗尽，Error不能在程序运行过程中被动态处理，一旦出现Error，系统能做的只有记录错误的原因和安全终止。</p>
+<p><strong>Exception</strong> 指 Java程序运行异常，在运行中的程序发生了程序员不期望发生的事情，可以被Java异常处理机制处理。Exception也是程序开发中异常处理的核心，可分为<strong>RuntimeException</strong>（运行时异常）和<strong>CheckedException</strong>（检查异常），如下图所示：<br><img src="https://files.mdnice.com/user/20622/97a026e2-2ce4-4b32-a2f5-216d7b1ee61d.png"></p>
+<ul>
+<li><strong>RuntimeException</strong>（运行时异常）：指在Java虚拟机<strong>正常运行期间抛出的异常</strong>，RuntimeException可以被捕获并处理，如果出现此情况，我们需要抛出异常或者捕获并处理异常。常见的有NullPointerException、ClassCastException、ArrayIndexOutOfBoundsException等</li>
+<li><strong>CheckedException</strong>（检查异常）：指在<strong>编译阶段Java编译器检查CheckedException异常</strong>，并强制程序捕获和处理此类异常，要求程序在可能出现异常的地方通过try catch语句块捕获异常并处理异常。常见的有由于I/O错误导致的<strong>IOException、SQLException、ClassNotFoundException</strong>等。该类异常通常由于<strong>打开错误的文件、SQL语法错误、类不存</strong>等引起。<h2 id="异常处理方式"><a href="#异常处理方式" class="headerlink" title="异常处理方式"></a>异常处理方式</h2>异常处理方式有抛出异常和使用try catch语句块捕获异常两种方式。  </li>
+</ul>
+<p>（1）<strong>抛出异常</strong>：遇到异常时不进行具体的处理，直接将异常抛给调用者，让调用者自己根据情况处理。抛出异常的三种形式：throws、throw和系统自动抛出异常。其中throws作用在方法上，用于定义方法可能抛出的异常；throw作用在方法内，表示明确抛出一个异常。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">//（1）使用throws在方法上抛出异常</span><br><span class="line">public static void main(String[] args) throws Exception &#123;</span><br><span class="line">    String str = &quot;hello world&quot;;</span><br><span class="line">    int index = 10;</span><br><span class="line">    div(10,0);</span><br><span class="line">    if(index &gt;= str.length())&#123;</span><br><span class="line">        //1：使用throw 在方法内抛出异常</span><br><span class="line">        throw new StringIndexOutOfBoundsException();</span><br><span class="line">    &#125;else &#123;</span><br><span class="line">        str.substring(0,index);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">public static  void div(int a,int b) &#123;</span><br><span class="line">    System.out.println(a/b);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>（2）<strong>使用try catch捕获并处理异常</strong>：使用费try catch 捕获异常能够有针对性的处理每种可能出现的异常，并在捕获到异常后根据不同的情况做不同的处理。其使用过程比较简单：用try catch语句块将可能出现异常的代码抱起来即可。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">try&#123;</span><br><span class="line"> //具体的业务逻辑实现</span><br><span class="line">&#125;catch (Exception e)&#123;</span><br><span class="line"> //捕获异常并处理</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="throw-和-throws的区别"><a href="#throw-和-throws的区别" class="headerlink" title="throw 和 throws的区别"></a>throw 和 throws的区别</h2><ul>
+<li><p><strong>位置不同</strong>：throws作用在<strong>方法上</strong>，后面跟的是<strong>异常的类</strong>，而throw作用在<strong>方法内</strong>，后面跟的是<strong>异常的对象</strong>。</p>
+</li>
+<li><p><strong>功能不同</strong>：throws用来声明方法在运行中可能出现的异常，以便调用者根据不同的异常类型预先定义不同的处理方式；throw用来抛出封装了异常信息的对象，程序在执行到throw时后序的代码将不再执行，而是跳转到调用者，并将异常信息抛给调用者。也就是说throw后面的语句块将无法被执行（finally语句块除外！）</p>
+<h2 id="面试问题"><a href="#面试问题" class="headerlink" title="面试问题"></a>面试问题</h2><p>Java异常体系中的一个demo问题，如下所示：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">public  void test01() &#123;</span><br><span class="line">    int i = 1;</span><br><span class="line">    int divid = 0;</span><br><span class="line">    try &#123;</span><br><span class="line">        int n = i / divid;</span><br><span class="line">        System.out.println(&quot;走的try:&quot;+0);</span><br><span class="line">    &#125; catch (Exception e) &#123;</span><br><span class="line">        System.out.println(&quot;走的catch:&quot;+1);</span><br><span class="line">        //return returnSttat(i);</span><br><span class="line">    &#125; finally &#123;</span><br><span class="line">        System.out.println(&quot;走的finally:&quot;+2);;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="在异常的情况下会输出什么呢？"><a href="#在异常的情况下会输出什么呢？" class="headerlink" title="在异常的情况下会输出什么呢？"></a>在异常的情况下会输出什么呢？</h3><p>比如上面给出的i = 1,divid = 0; 此时i/divid = 1/0 是不允许的！</p>
+</li>
+</ul>
+<p>所以会捕获异常，也就是会走catch，因此会输出：走了catch:1</p>
+<p>最后的finally不管是否异常都会走，所以同时也会输出：走了finally:2</p>
+<h4 id="总的输出是："><a href="#总的输出是：" class="headerlink" title="总的输出是："></a>总的输出是：</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">走的catch:1</span><br><span class="line">走的finally:2</span><br></pre></td></tr></table></figure>
+<h3 id="在正常的情况下会输出什么呢？"><a href="#在正常的情况下会输出什么呢？" class="headerlink" title="在正常的情况下会输出什么呢？"></a>在正常的情况下会输出什么呢？</h3><p>比如给出 i=4,divid = 2;此时i/divid = 4/2 是允许的！</p>
+<p>所以不用捕获异常，也就是会走try，因此会输出：try:0</p>
+<p>最后的finally不管是否异常都会走，所以同时也会输出：走了finally:2</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">走的try:0</span><br><span class="line">走的finally:2</span><br></pre></td></tr></table></figure>
+            <div class="post-copyright">
+    <div class="content">
+        <p>最后更新： 2021年11月08日 08:26</p>
+        <p>原始链接： <a class="post-url" href="/2021/11/08/Java%E4%B8%AD%E7%9A%84%E5%BC%82%E5%B8%B8%E4%BD%93%E7%B3%BB/" title="">https://radicalfive.github.io/2021/11/08/Java%E4%B8%AD%E7%9A%84%E5%BC%82%E5%B8%B8%E4%BD%93%E7%B3%BB/</a></p>
+        <footer>
+            <a href="https://Radicalfive.github.io">
+                <img src="/images/logo.png" alt="Radical">
+                Radical
+            </a>
+        </footer>
+    </div>
+</div>
+
+      
+        
+            
+<div class="page-reward">
+    <a id="rewardBtn" href="javascript:;">赏</a>
+</div>
+
+<div id="reward" class="post-modal reward-lay">
+    <a class="close" href="javascript:;" id="reward-close">×</a>
+    <span class="reward-title">
+        <i class="icon icon-quote-left"></i>
+        请我喝奶茶~
+        <i class="icon icon-quote-right"></i>
+    </span>
+    <div class="reward-content">
+        
+        <div class="reward-code">
+            <img id="rewardCode" src="/images/wechat_code.jpg" alt="打赏二维码">
+        </div>
+        <div class="reward-select">
+            
+            <label class="reward-select-item checked" data-id="wechat" data-wechat="/images/wechat_code.jpg">
+                <img class="reward-select-item-wechat" src="/images/wechat.png" alt="微信">
+            </label>
+            
+            
+            <label class="reward-select-item" data-id="alipay" data-alipay="/images/alipay_code.jpg">
+                <img class="reward-select-item-alipay" src="/images/alipay.png" alt="支付宝">
+            </label>
+            
+        </div>
+    </div>
+</div>
+
+
+        
+    </div>
+    <footer class="article-footer">
+        
+        
+<div class="post-share">
+    <a href="javascript:;" id="share-sub" class="post-share-fab">
+        <i class="fa fa-share-alt"></i>
+    </a>
+    <div class="post-share-list" id="share-list">
+        <ul class="share-icons">
+          <li>
+            <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=https://radicalfive.github.io/2021/11/08/Java%E4%B8%AD%E7%9A%84%E5%BC%82%E5%B8%B8%E4%BD%93%E7%B3%BB/&title=如困兽之斗&pic=https://Radicalfive.github.ioimages/logo.png" data-title="微博">
+              <i class="fa fa-weibo"></i>
+            </a>
+          </li>
+          <li>
+            <a class="weixin share-sns" id="wxFab" href="javascript:;" data-title="微信">
+              <i class="fa fa-weixin"></i>
+            </a>
+          </li>
+          <li>
+            <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https://radicalfive.github.io/2021/11/08/Java%E4%B8%AD%E7%9A%84%E5%BC%82%E5%B8%B8%E4%BD%93%E7%B3%BB/&title=如困兽之斗&source=基于GitHub的个人博客" data-title="QQ">
+              <i class="fa fa-qq"></i>
+            </a>
+          </li>
+          <li>
+            <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://radicalfive.github.io/2021/11/08/Java%E4%B8%AD%E7%9A%84%E5%BC%82%E5%B8%B8%E4%BD%93%E7%B3%BB/" data-title="Facebook">
+              <i class="fa fa-facebook"></i>
+            </a>
+          </li>
+          <li>
+            <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=如困兽之斗&url=https://radicalfive.github.io/2021/11/08/Java%E4%B8%AD%E7%9A%84%E5%BC%82%E5%B8%B8%E4%BD%93%E7%B3%BB/&via=https://Radicalfive.github.io" data-title="Twitter">
+              <i class="fa fa-twitter"></i>
+            </a>
+          </li>
+          <li>
+            <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https://radicalfive.github.io/2021/11/08/Java%E4%B8%AD%E7%9A%84%E5%BC%82%E5%B8%B8%E4%BD%93%E7%B3%BB/" data-title="Google+">
+              <i class="fa fa-google-plus"></i>
+            </a>
+          </li>
+        </ul>
+     </div>
+</div>
+<div class="post-modal wx-share" id="wxShare">
+    <a class="close" href="javascript:;" id="wxShare-close">×</a>
+    <p>扫一扫，分享到微信</p>
+    <img src="//api.qrserver.com/v1/create-qr-code/?data=https://radicalfive.github.io/2021/11/08/Java%E4%B8%AD%E7%9A%84%E5%BC%82%E5%B8%B8%E4%BD%93%E7%B3%BB/" alt="微信分享二维码">
+</div>
+
+<div class="mask"></div>
+
+        
+        <ul class="article-footer-menu">
+            
+            
+        </ul>
+        
+    </footer>
+  </div>
+</article>
+
+
+    <aside class="post-toc-pos post-toc-top" id="post-toc">
+        <nav class="post-toc-wrap">
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#Java%E4%B8%AD%E7%9A%84%E5%BC%82%E5%B8%B8%E4%BD%93%E7%B3%BB"><span class="post-toc-text">Java中的异常体系</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#%E6%A6%82%E5%BF%B5"><span class="post-toc-text">概念</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#%E5%BC%82%E5%B8%B8%E5%88%86%E7%B1%BB"><span class="post-toc-text">异常分类</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#%E5%BC%82%E5%B8%B8%E5%A4%84%E7%90%86%E6%96%B9%E5%BC%8F"><span class="post-toc-text">异常处理方式</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#throw-%E5%92%8C-throws%E7%9A%84%E5%8C%BA%E5%88%AB"><span class="post-toc-text">throw 和 throws的区别</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#%E9%9D%A2%E8%AF%95%E9%97%AE%E9%A2%98"><span class="post-toc-text">面试问题</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#%E5%9C%A8%E5%BC%82%E5%B8%B8%E7%9A%84%E6%83%85%E5%86%B5%E4%B8%8B%E4%BC%9A%E8%BE%93%E5%87%BA%E4%BB%80%E4%B9%88%E5%91%A2%EF%BC%9F"><span class="post-toc-text">在异常的情况下会输出什么呢？</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#%E6%80%BB%E7%9A%84%E8%BE%93%E5%87%BA%E6%98%AF%EF%BC%9A"><span class="post-toc-text">总的输出是：</span></a></li></ol></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#%E5%9C%A8%E6%AD%A3%E5%B8%B8%E7%9A%84%E6%83%85%E5%86%B5%E4%B8%8B%E4%BC%9A%E8%BE%93%E5%87%BA%E4%BB%80%E4%B9%88%E5%91%A2%EF%BC%9F"><span class="post-toc-text">在正常的情况下会输出什么呢？</span></a></li></ol></li></ol></li></ol>
+        </nav>
+    </aside>
+    
+
+<nav id="article-nav">
+  
+  
+    <a href="/2021/11/05/%E3%80%8A%E6%9C%9D%E8%8A%B1%E5%A4%95%E6%8B%BE%E3%80%8B%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/" id="article-nav-older" class="article-nav-link-wrap">
+      <span class="article-nav-title"></span>
+      <i class="fa fa-hand-o-right" aria-hidden="true"></i>
+    </a>
+  
+</nav>
+
+
+
+    
+        <div id="SOHUCS" sid="Java中的异常体系" ></div>
+<script type="text/javascript">
+    (function(){
+        var appid = 'true';
+        var conf = 'true';
+        var width = window.innerWidth || document.documentElement.clientWidth;
+        if (width < 960) {
+            window.document.write('<script id="changyan_mobile_js" charset="utf-8" type="text/javascript" src="https://changyan.sohu.com/upload/mobile/wap-js/changyan_mobile.js?client_id=' + appid + '&conf=' + conf + '"><\/script>'); } else { var loadJs=function(d,a){var c=document.getElementsByTagName("head")[0]||document.head||document.documentElement;var b=document.createElement("script");b.setAttribute("type","text/javascript");b.setAttribute("charset","UTF-8");b.setAttribute("src",d);if(typeof a==="function"){if(window.attachEvent){b.onreadystatechange=function(){var e=b.readyState;if(e==="loaded"||e==="complete"){b.onreadystatechange=null;a()}}}else{b.onload=a}}c.appendChild(b)};loadJs("https://changyan.sohu.com/upload/changyan.js",function(){window.changyan.api.config({appid:appid,conf:conf})}); } })(); </script>
+    
+</section>
+        
+      </div>
+      <footer id="footer">
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      
+<p>
+    <span id="busuanzi_container_site_uv" style='display:none'>
+        总访客数：<span id="busuanzi_value_site_uv"></span>
+    </span>
+    <span id="busuanzi_container_site_pv" style='display:none'>
+        总访问量：<span id="busuanzi_value_site_pv"></span>
+    </span>
+</p>
+
+
+      <p>
+        Powered by  <a href="http://hexo.io/" target="_blank">Hexo</a>
+        Theme <a href="//github.com/wongminho/hexo-theme-miho" target="_blank">MiHo</a>
+      &copy; 2021 Radical<br>
+      </p>
+    </div>
+  </div>
+</footer>
+    <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+<script src="//cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
+<script>
+  var mihoConfig = {
+      root: "https://Radicalfive.github.io",
+      animate: true,
+      isHome: false,
+      share: true,
+      reward: 1
+  }
+</script>
+<div class="sidebar">
+    <div id="sidebar-search" title="Search">
+        <i class="fa fa-search"></i>
+    </div>
+    <div id="sidebar-category" title="Categories">
+        <i class="fa fa-book"></i>
+    </div>
+    <div id="sidebar-tag" title="Tags">
+        <i class="fa fa-tags"></i>
+    </div>
+    <div id="sidebar-top">
+        <span class="sidebar-top-icon"><i class="fa fa-angle-up"></i></span>
+    </div>
+</div>
+<div class="sidebar-menu-box" id="sidebar-menu-box">
+    <div class="sidebar-menu-box-container">
+        <div id="sidebar-menu-box-categories">
+            
+        </div>
+        <div id="sidebar-menu-box-tags">
+            <a href="/tags/git-Git/" style="font-size: 10px;">git,Git</a>
+        </div>
+    </div>
+    <a href="javascript:;" class="sidebar-menu-box-close">&times;</a>
+</div>
+<div class="mobile-header-menu-nav" id="mobile-header-menu-nav">
+    <div class="mobile-header-menu-container">
+        <span class="title">Menus</span>
+        <ul class="mobile-header-menu-navbar">
+            
+            <li>
+                <a  href="/">
+                    <i class="fa fa-home"></i><span>Home</span>
+                </a>
+            </li>
+            
+            <li>
+                <a  href="/archives">
+                    <i class="fa fa-archive"></i><span>Archives</span>
+                </a>
+            </li>
+            
+            <li>
+                <a  href="/about">
+                    <i class="fa fa-user"></i><span>About</span>
+                </a>
+            </li>
+            
+        </ul>
+    </div>
+    <div class="mobile-header-tag-container">
+        <span class="title">Tags</span>
+        <div id="mobile-header-container-tags">
+            <a href="/tags/git-Git/" style="font-size: 10px;">git,Git</a>
+        </div>
+    </div>
+</div>
+<div class="search-wrap">
+    <span class="search-close">&times;</span>
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+            <i class="icon icon-lg icon-chevron-left"></i>
+        </a>
+        <input class="search-field" placeholder="Search..." id="keywords">
+        <a id="search-submit" href="javascript:;">
+            <i class="fa fa-search"></i>
+        </a>
+    <div class="search-container" id="search-container">
+        <ul class="search-result" id="search-result">
+        </ul>
+    </div>
+</div>
+
+<div id="search-tpl">
+    <li class="search-result-item">
+        <a href="{url}" class="search-item-li">
+            <span class="search-item-li-title" title="{title}">{title}</span>
+        </a>
+    </li>
+</div>
+
+<script src="/js/search.js"></script>
+
+
+<script src="/js/main.js"></script>
+
+
+
+  <script src="//cdn.bootcss.com/particles.js/2.0.0/particles.min.js"></script>
+  <div id="particles"></div>
+  
+<script src="/js/particles.js"></script>
+
+
+
+
+
+
+
+
+  
+<link rel="stylesheet" href="//cdn.bootcss.com/animate.css/3.5.0/animate.min.css">
+
+  <script src="//cdn.bootcss.com/scrollReveal.js/3.0.5/scrollreveal.js"></script>
+  
+<script src="/js/animate.js"></script>
+
+
+
+  
+<script src="/js/pop-img.js"></script>
+
+  <script>
+     $(".article-entry p img").popImg();
+  </script>
+
+  </div>
+</body>
+</html>
