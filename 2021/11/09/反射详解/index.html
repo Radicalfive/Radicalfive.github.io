@@ -1,0 +1,469 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>如困兽之斗</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  
+    <meta name="keywords" content="radical,radical's Blog" />
+  
+  <meta name="description" content="Java反射机制原理详解 一、类的加载与ClassLoader的理解1、加载将class文件字节码内容加载到内存中，并将这些静态数据转换成方法区的运行时数据结构，然后生成一个代表这个类的java.lang.class对象。 2、链接 将Java类的二进制代码合并到JVM的运行状态之中的过程。  验证：确保加载的类信息符合JVM规范，没有安全方面的问题；准备：正式为类变量分配内存并设置类变量默认初始">
+<meta property="og:type" content="article">
+<meta property="og:title" content="如困兽之斗">
+<meta property="og:url" content="https://radicalfive.github.io/2021/11/09/%E5%8F%8D%E5%B0%84%E8%AF%A6%E8%A7%A3/">
+<meta property="og:site_name" content="如困兽之斗">
+<meta property="og:description" content="Java反射机制原理详解 一、类的加载与ClassLoader的理解1、加载将class文件字节码内容加载到内存中，并将这些静态数据转换成方法区的运行时数据结构，然后生成一个代表这个类的java.lang.class对象。 2、链接 将Java类的二进制代码合并到JVM的运行状态之中的过程。  验证：确保加载的类信息符合JVM规范，没有安全方面的问题；准备：正式为类变量分配内存并设置类变量默认初始">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="c:/Users/test/AppData/Roaming/Typora/typora-user-images/1636465739401.png">
+<meta property="og:image" content="c:/Users/test/AppData/Roaming/Typora/typora-user-images/1636466689312.png">
+<meta property="og:image" content="c:/Users/test/AppData/Roaming/Typora/typora-user-images/1636467243830.png">
+<meta property="og:image" content="c:/Users/test/AppData/Roaming/Typora/typora-user-images/1636469093677.png">
+<meta property="og:image" content="c:/Users/test/AppData/Roaming/Typora/typora-user-images/1636469134546.png">
+<meta property="og:image" content="c:/Users/test/AppData/Roaming/Typora/typora-user-images/1636469202778.png">
+<meta property="article:published_time" content="2021-11-09T12:53:18.518Z">
+<meta property="article:modified_time" content="2021-11-09T14:49:12.178Z">
+<meta property="article:author" content="Radical">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="c:/Users/test/AppData/Roaming/Typora/typora-user-images/1636465739401.png">
+  
+  
+    <link rel="icon" href="/favicon.ico">
+  
+  <link href="//cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+<script src="/js/pace.min.js"></script>
+
+  
+
+  
+  
+
+<meta name="generator" content="Hexo 5.4.0"></head>
+
+<body>
+  <div id="container">
+      <header id="header">
+    <div id="banner"></div>
+    <div id="header-outer">
+        <div id="header-menu" class="header-menu-pos animated">
+            <div class="header-menu-container">
+                <a href="/" class="left">
+                    <span class="site-title">radical&#39;s Blog</span>
+                </a>
+                <nav id="header-menu-nav" class="right">
+                    
+                    <a  href="/">
+                        <i class="fa fa-home"></i>
+                        <span>Home</span>
+                    </a>
+                    
+                    <a  href="/archives">
+                        <i class="fa fa-archive"></i>
+                        <span>Archives</span>
+                    </a>
+                    
+                    <a  href="/about">
+                        <i class="fa fa-user"></i>
+                        <span>About</span>
+                    </a>
+                    
+                </nav>
+                <a class="mobile-header-menu-button">
+                    <i class="fa fa-bars"></i>
+                </a>
+            </div>
+        </div>
+        <div id="header-row">
+            <div id="logo">
+                <a href="/">
+                    <img src="/images/logo.png" alt="logo">
+                </a>
+            </div>
+            <div class="header-info">
+                <div id="header-title">
+                    
+                    <h2>
+                        radical&#39;s Blog
+                    </h2>
+                    
+                </div>
+                <div id="header-description">
+                    
+                    <h3>
+                        且将新火试新茶 诗酒趁年华
+                    </h3>
+                    
+                </div>
+            </div>
+            <nav class="header-nav">
+                <div class="social">
+                    
+                        <a title="radical" target="_blank" href="//radical.com">
+                            <i class="fa fa-home fa-2x"></i></a>
+                    
+                        <a title="Github" target="_blank" href="//github.com/wongminho">
+                            <i class="fa fa-github fa-2x"></i></a>
+                    
+                        <a title="Weibo"  target="_blank" rel="noopener" href="//weibo.com/WongMinHo">
+                            <i class="fa fa-weibo fa-2x"></i></a>
+                    
+                        <a title="Twitter"  target="_blank" rel="noopener" href="//twitter.com/huangminhow">
+                            <i class="fa fa-twitter fa-2x"></i></a>
+                    
+                        <a   ">
+                            <i class="fa fa-qq fa-2x"></i></a>
+                    
+                        <a   ">
+                            <i class="fa fa-weixin fa-2x"></i></a>
+                    
+                </div>
+            </nav>
+        </div>
+    </div>
+</header>
+      <div class="outer">
+        <section id="main" class="body-wrap"><article id="post-反射详解" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+    <div class="article-entry post-content" itemprop="articleBody">
+      
+            
+            <p>Java反射机制原理详解</p>
+<h2 id="一、类的加载与ClassLoader的理解"><a href="#一、类的加载与ClassLoader的理解" class="headerlink" title="一、类的加载与ClassLoader的理解"></a>一、类的加载与ClassLoader的理解</h2><h3 id="1、加载"><a href="#1、加载" class="headerlink" title="1、加载"></a>1、加载</h3><p>将class文件字节码内容加载到内存中，并将这些静态数据转换成方法区的运行时数据结构，然后生成一个代表这个类的java.lang.class对象。</p>
+<h3 id="2、链接"><a href="#2、链接" class="headerlink" title="2、链接"></a>2、链接</h3><blockquote>
+<p>将Java类的二进制代码合并到JVM的运行状态之中的过程。</p>
+</blockquote>
+<p>验证：确保加载的类信息符合JVM规范，没有安全方面的问题；<br>准备：正式为类变量分配内存并设置类变量默认初始值的阶段，这些内存都将在方法区内进行分配；<br>解析：虚拟机常量池内的符号引用（常量名）替换为直接引用（地址）的过程。</p>
+<h3 id="3、初始化"><a href="#3、初始化" class="headerlink" title="3、初始化"></a>3、初始化</h3><p>执行类构造器<clinit>()方法的过程。类构造器<clinit>()方法是由编译期自动收集类中所有类变量的赋值动作和静态代码块中的语句合并产生的。（类构造器是构造类信息的，不是构造该类对象的构造器）。<br>当初始化一个类的时候，如果发现其父类还没有进行初始化，则需要先触发其父类的初始化。<br>虚拟机会保证一个类的<clinit>()方法在多线程环境中被正确加锁和同步。</p>
+<h2 id="二、什么时候会发生类初始化"><a href="#二、什么时候会发生类初始化" class="headerlink" title="二、什么时候会发生类初始化"></a>二、什么时候会发生类初始化</h2><h3 id="1、类的主动引用（一定会发生类的初始化）"><a href="#1、类的主动引用（一定会发生类的初始化）" class="headerlink" title="1、类的主动引用（一定会发生类的初始化）"></a>1、类的主动引用（一定会发生类的初始化）</h3><p>当虚拟机启动，先初始化main方法所在的类；<br>new一个类的对象；<br>调用类的静态成员（除了final常量）和静态方法；<br>使用java.lang.reflect包的方法对类进行反射调用；<br>当初始化一个类，如果其父类没有被初始化，则先会初始化它的父类；</p>
+<h3 id="2、类的被动调用（不会发生类的初始化）"><a href="#2、类的被动调用（不会发生类的初始化）" class="headerlink" title="2、类的被动调用（不会发生类的初始化）"></a>2、类的被动调用（不会发生类的初始化）</h3><ul>
+<li>当访问一个静态域时，只有真正声明这个域的类才会被初始化。如：当通过子类引用父类的静态变量，不会导致子类初始化;</li>
+<li>通过数组定义类引用，不会触发此类的初始化；</li>
+<li>引用常量不会触发此类的初始化（常量在链接阶段就存入调用类的常量池中了) ;</li>
+</ul>
+<h2 id="三、类加载器的作用"><a href="#三、类加载器的作用" class="headerlink" title="三、类加载器的作用"></a>三、类加载器的作用</h2><p>将class文件字节码内容加载到内存中，并将这些静态数据转换成方法区的运行时数据结构，然后在堆中生成一个代表这个类的java.lang.Class对象，作为方法区中类数据的访问入口。</p>
+<h2 id="四、动态创建对象执行方法"><a href="#四、动态创建对象执行方法" class="headerlink" title="四、动态创建对象执行方法"></a>四、动态创建对象执行方法</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Slf4j</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ReflectDemo1</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> <span class="keyword">throws</span> ClassNotFoundException, NoSuchMethodException, InvocationTargetException, InstantiationException, IllegalAccessError, NoSuchFieldException, IllegalAccessException </span>&#123;</span><br><span class="line">        <span class="comment">//获得class对象</span></span><br><span class="line">        Class&lt;?&gt; clazz=Class.forName(<span class="string">&quot;com.wx.java.basic.reflection.User&quot;</span>);</span><br><span class="line">        <span class="comment">//1.构造一个对象，本质是无参构造器</span></span><br><span class="line">        User user1=(User) clazz.getDeclaredConstructor().newInstance();</span><br><span class="line">        log.info(<span class="string">&quot;user1:&#123;&#125;&quot;</span>,user1);</span><br><span class="line"></span><br><span class="line">        <span class="comment">//通过构造器创建对象</span></span><br><span class="line">        Constructor&lt;?&gt; constructor=clazz.getDeclaredConstructor(Integer.class,String.class);</span><br><span class="line">        User user2=(User) constructor.newInstance(<span class="number">1</span>,<span class="string">&quot;radical&quot;</span>);</span><br><span class="line">        log.info(<span class="string">&quot;user2:&#123;&#125;&quot;</span>,user2);</span><br><span class="line"></span><br><span class="line">        <span class="comment">//通过反射调用普通方法</span></span><br><span class="line">        User user3=(User) clazz.getDeclaredConstructor().newInstance();</span><br><span class="line">        Method setName=clazz.getDeclaredMethod(<span class="string">&quot;setName&quot;</span>, String.class);</span><br><span class="line"></span><br><span class="line">        <span class="comment">//invoke激活</span></span><br><span class="line">        setName.invoke(user3,<span class="string">&quot;诗酒趁年华&quot;</span>);</span><br><span class="line">        log.info(<span class="string">&quot;user3,name&#123;&#125;&quot;</span>,user3.getName());</span><br><span class="line"></span><br><span class="line">        <span class="comment">//4.通过反射操作属性(即使私有也照样可以)</span></span><br><span class="line">        User user4=(User) clazz.getDeclaredConstructor().newInstance();</span><br><span class="line">        Field name=clazz.getDeclaredField(<span class="string">&quot;name&quot;</span>);</span><br><span class="line">        name.setAccessible(<span class="keyword">true</span>);</span><br><span class="line">        name.set(user4,<span class="string">&quot;如困兽之斗&quot;</span>);</span><br><span class="line">        log.info(<span class="string">&quot;user4.name&#123;&#125;&quot;</span>,user4.getName());</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><strong>注：User类封装Integer类型的id和String类型的name两个属性</strong></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@AllArgsConstructor</span></span><br><span class="line"><span class="meta">@NoArgsConstructor</span></span><br><span class="line"><span class="meta">@Builder</span></span><br><span class="line"><span class="meta">@Data</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">User</span> </span>&#123;</span><br><span class="line">    <span class="keyword">private</span> Integer id;</span><br><span class="line">    <span class="keyword">private</span> String name;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>运行结果：</p>
+<p><img src="C:\Users\test\AppData\Roaming\Typora\typora-user-images\1636465739401.png" alt="1636465739401"></p>
+<h2 id="五、通过反射获取泛型信息"><a href="#五、通过反射获取泛型信息" class="headerlink" title="五、通过反射获取泛型信息"></a>五、通过反射获取泛型信息</h2><h3 id="1、代码实例"><a href="#1、代码实例" class="headerlink" title="1、代码实例"></a>1、代码实例</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Slf4j</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ReflectDemo2</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">method1</span><span class="params">(Map&lt;String , User&gt; map , List&lt;User&gt; list)</span> </span>&#123;</span><br><span class="line">        log.info(<span class="string">&quot;method1&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> Map&lt;String , User&gt; <span class="title">method2</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        log.info(<span class="string">&quot;method&quot;</span>);</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">null</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> <span class="keyword">throws</span> Exception</span>&#123;</span><br><span class="line">        <span class="comment">//通过反射获取方法参数信息</span></span><br><span class="line">        Method method = ReflectDemo2.class.getMethod(<span class="string">&quot;method1&quot;</span>, Map.class, List.class);</span><br><span class="line">        Type[] genericParameterTypes = method.getGenericParameterTypes();</span><br><span class="line">        <span class="keyword">for</span> (Type genericParameterType : genericParameterTypes) &#123;</span><br><span class="line">            log.info(<span class="string">&quot;泛型参数类型:&#123;&#125;&quot;</span> , genericParameterType);</span><br><span class="line">            <span class="keyword">if</span> (genericParameterType <span class="keyword">instanceof</span> ParameterizedType) &#123;</span><br><span class="line">                Type[] actualTypeArguments = ((ParameterizedType)</span><br><span class="line">                        genericParameterType).getActualTypeArguments();</span><br><span class="line">                <span class="keyword">for</span> (Type actualTypeArgument : actualTypeArguments) &#123;</span><br><span class="line">                    log.info(<span class="string">&quot;实际类型：&#123;&#125;&quot;</span>, actualTypeArgument);</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="comment">//通过反射获取方法返回值信息</span></span><br><span class="line">        method = ReflectDemo2.class.getMethod(<span class="string">&quot;method2&quot;</span> , <span class="keyword">null</span>);</span><br><span class="line">        Type genericReturnType = method.getGenericReturnType();</span><br><span class="line">        <span class="keyword">if</span> (genericReturnType <span class="keyword">instanceof</span>  ParameterizedType) &#123;</span><br><span class="line">            Type[] actualTypeArguments = ((ParameterizedType)genericReturnType).getActualTypeArguments();</span><br><span class="line">            <span class="keyword">for</span> (Type actualTypeArgument : actualTypeArguments) &#123;</span><br><span class="line">                log.info(<span class="string">&quot;实际参数类型&#123;&#125;&quot;</span> , actualTypeArgument);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="2-输出结果"><a href="#2-输出结果" class="headerlink" title="2. 输出结果"></a>2. 输出结果</h3><p><img src="C:\Users\test\AppData\Roaming\Typora\typora-user-images\1636466689312.png" alt="1636466689312"></p>
+<h3 id="3、反射解决泛型问题"><a href="#3、反射解决泛型问题" class="headerlink" title="3、反射解决泛型问题"></a>3、反射解决泛型问题</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Slf4j</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ReflectDemo3</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> <span class="keyword">throws</span> NoSuchMethodException, InvocationTargetException,</span></span><br><span class="line"><span class="function">            IllegalAccessException</span>&#123;</span><br><span class="line">        List&lt;String&gt; list = <span class="keyword">new</span> ArrayList&lt;&gt;();</span><br><span class="line">        list.add(<span class="string">&quot;one&quot;</span>);</span><br><span class="line">        list.add(<span class="string">&quot;two&quot;</span>);</span><br><span class="line">        <span class="comment">//list.add(18); //不是String，报错——&gt; 下面通过反射解决这个问题</span></span><br><span class="line"></span><br><span class="line">        Class&lt;?&gt; clazz = list.getClass();</span><br><span class="line">        Method method = clazz.getMethod(<span class="string">&quot;add&quot;</span>, Object.class);</span><br><span class="line">        method.invoke(list,<span class="number">18</span>);</span><br><span class="line">        log.info(<span class="string">&quot;反射太强大了！！&#123;&#125;&quot;</span> , list);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><img src="C:\Users\test\AppData\Roaming\Typora\typora-user-images\1636467243830.png" alt="1636467243830"></p>
+<h2 id="六、通过反射获取注解信息"><a href="#六、通过反射获取注解信息" class="headerlink" title="六、通过反射获取注解信息"></a>六、通过反射获取注解信息</h2><h3 id="1、代码实例-1"><a href="#1、代码实例-1" class="headerlink" title="1、代码实例"></a>1、代码实例</h3><p>创建类注解、属性注解、使用自定义注解</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@TableSu(&quot;t_student&quot;)</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Student</span> </span>&#123;</span><br><span class="line">    <span class="meta">@FieldSu(columnName = &quot;user_id&quot;,type = &quot;int&quot;,length = 10)</span></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">int</span> id;</span><br><span class="line">    <span class="meta">@FieldSu(columnName = &quot;user_name&quot;,type = &quot;varchar&quot;,length = 10)</span></span><br><span class="line">    <span class="keyword">private</span> String name;</span><br><span class="line">    <span class="meta">@FieldSu(columnName = &quot;user_age&quot;,type = &quot;int&quot;,length = 10)</span></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">int</span> age;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">Student</span><span class="params">()</span></span>&#123;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">Student</span><span class="params">(<span class="keyword">int</span> id,String name, <span class="keyword">int</span> age )</span></span>&#123;</span><br><span class="line">    <span class="keyword">this</span>.id = id;</span><br><span class="line">    <span class="keyword">this</span>.name = name;</span><br><span class="line">    <span class="keyword">this</span>.age = age;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">getId</span><span class="params">()</span></span>&#123;</span><br><span class="line">        <span class="keyword">return</span> id;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setId</span><span class="params">(<span class="keyword">int</span> id)</span></span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.id = id;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">getName</span><span class="params">()</span></span>&#123;</span><br><span class="line">        <span class="keyword">return</span> name;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setName</span><span class="params">(String name)</span></span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.name = name;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">getAge</span><span class="params">()</span></span>&#123;</span><br><span class="line">        <span class="keyword">return</span> age;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setAge</span><span class="params">(<span class="keyword">int</span> age)</span></span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.age = age;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">toString</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="string">&quot;Student&#123;&quot;</span> +</span><br><span class="line">                <span class="string">&quot;id=&quot;</span> + id +</span><br><span class="line">                <span class="string">&quot;, name=&#x27;&quot;</span> + name + <span class="string">&#x27;\&#x27;&#x27;</span> +</span><br><span class="line">                <span class="string">&quot;,age=&quot;</span> + age +</span><br><span class="line">                <span class="string">&#x27;&#125;&#x27;</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>通过反射来获取注解信息</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Slf4j</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ReflectDemo4</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> <span class="keyword">throws</span> Exception </span>&#123;</span><br><span class="line">        Class&lt;?&gt; clazz = Class.forName(<span class="string">&quot;com.wx.java.basic.reflection.Student&quot;</span>);</span><br><span class="line">        <span class="comment">//通过反射获取注解</span></span><br><span class="line">        Annotation[] annotations = clazz.getAnnotations();</span><br><span class="line">        <span class="keyword">for</span> (Annotation annotation : annotations) &#123;</span><br><span class="line">            log.info(<span class="string">&quot;注解：&#123;&#125;&quot;</span>, annotation);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="comment">//获得注解value的值</span></span><br><span class="line">        TableSu tableSu = clazz.getAnnotation(TableSu.class);</span><br><span class="line">        String value = tableSu.value();</span><br><span class="line">        log.info(<span class="string">&quot;注解的值：&#123;&#125;&quot;</span>, value);</span><br><span class="line">        <span class="comment">//获得类指定的注解</span></span><br><span class="line">        Field field = clazz.getDeclaredField(<span class="string">&quot;name&quot;</span>);</span><br><span class="line">        FieldSu annotation = field.getAnnotation(FieldSu.class);</span><br><span class="line">        log.info(<span class="string">&quot;name:&#123;&#125;&quot;</span>, annotation.columnName());</span><br><span class="line">        log.info(<span class="string">&quot;type:&#123;&#125;&quot;</span>, annotation.type());</span><br><span class="line">        log.info(<span class="string">&quot;length:&#123;&#125;&quot;</span>, annotation.length());</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="2、输出结果"><a href="#2、输出结果" class="headerlink" title="2、输出结果"></a>2、输出结果</h3><p><img src="C:\Users\test\AppData\Roaming\Typora\typora-user-images\1636469093677.png" alt="1636469093677"></p>
+<h2 id="七、通过配置文件动态调用方法"><a href="#七、通过配置文件动态调用方法" class="headerlink" title="七、通过配置文件动态调用方法"></a>七、通过配置文件动态调用方法</h2><h3 id="1、在项目根目录新建Class-txt文件"><a href="#1、在项目根目录新建Class-txt文件" class="headerlink" title="1、在项目根目录新建Class.txt文件"></a>1、在项目根目录新建Class.txt文件</h3><p><img src="C:\Users\test\AppData\Roaming\Typora\typora-user-images\1636469134546.png" alt="1636469134546"></p>
+<h3 id="2、建一个Person类"><a href="#2、建一个Person类" class="headerlink" title="2、建一个Person类"></a>2、建一个Person类</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Person</span> </span>&#123;</span><br><span class="line">    <span class="keyword">private</span> Integer id;</span><br><span class="line">    <span class="keyword">private</span> String name;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">Person</span><span class="params">()</span></span>&#123;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">Person</span><span class="params">(Integer id,String name)</span></span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.id = id;</span><br><span class="line">        <span class="keyword">this</span>.name = name;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">getPerson</span><span class="params">()</span></span>&#123;</span><br><span class="line">        System.out.println(<span class="string">&quot;I am a person.&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">toString</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="string">&quot;Person&#123;&quot;</span> +</span><br><span class="line">                <span class="string">&quot;id=&quot;</span> + id +</span><br><span class="line">                <span class="string">&quot;, name=&#x27;&quot;</span> + name + <span class="string">&#x27;\&#x27;&#x27;</span> +</span><br><span class="line">                <span class="string">&#x27;&#125;&#x27;</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="3、通过反射获取配置文件中内容调用类中方法"><a href="#3、通过反射获取配置文件中内容调用类中方法" class="headerlink" title="3、通过反射获取配置文件中内容调用类中方法"></a>3、通过反射获取配置文件中内容调用类中方法</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ReflectDemo5</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> <span class="keyword">throws</span> Exception </span>&#123;</span><br><span class="line">        Properties properties = <span class="keyword">new</span> Properties();</span><br><span class="line">        properties.load(<span class="keyword">new</span> FileReader(<span class="string">&quot;Class.txt&quot;</span>));</span><br><span class="line"></span><br><span class="line">        String className = properties.getProperty(<span class="string">&quot;className&quot;</span>);</span><br><span class="line">        String methodName = properties.getProperty(<span class="string">&quot;methodName&quot;</span>);</span><br><span class="line"></span><br><span class="line">        Class&lt;?&gt; clazz = Class.forName(className);</span><br><span class="line">        Method method = clazz.getMethod(methodName);</span><br><span class="line">        method.invoke(clazz.getDeclaredConstructor().newInstance());</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="4、输出结果"><a href="#4、输出结果" class="headerlink" title="4、输出结果"></a>4、输出结果</h3><p><img src="C:\Users\test\AppData\Roaming\Typora\typora-user-images\1636469202778.png" alt="1636469202778"></p>
+
+            <div class="post-copyright">
+    <div class="content">
+        <p>最后更新： 2021年11月09日 22:49</p>
+        <p>原始链接： <a class="post-url" href="/2021/11/09/%E5%8F%8D%E5%B0%84%E8%AF%A6%E8%A7%A3/" title="">https://radicalfive.github.io/2021/11/09/%E5%8F%8D%E5%B0%84%E8%AF%A6%E8%A7%A3/</a></p>
+        <footer>
+            <a href="https://Radicalfive.github.io">
+                <img src="/images/logo.png" alt="Radical">
+                Radical
+            </a>
+        </footer>
+    </div>
+</div>
+
+      
+        
+            
+<div class="page-reward">
+    <a id="rewardBtn" href="javascript:;">赏</a>
+</div>
+
+<div id="reward" class="post-modal reward-lay">
+    <a class="close" href="javascript:;" id="reward-close">×</a>
+    <span class="reward-title">
+        <i class="icon icon-quote-left"></i>
+        请我喝奶茶~
+        <i class="icon icon-quote-right"></i>
+    </span>
+    <div class="reward-content">
+        
+        <div class="reward-code">
+            <img id="rewardCode" src="/images/wechat_code.jpg" alt="打赏二维码">
+        </div>
+        <div class="reward-select">
+            
+            <label class="reward-select-item checked" data-id="wechat" data-wechat="/images/wechat_code.jpg">
+                <img class="reward-select-item-wechat" src="/images/wechat.png" alt="微信">
+            </label>
+            
+            
+            <label class="reward-select-item" data-id="alipay" data-alipay="/images/alipay_code.jpg">
+                <img class="reward-select-item-alipay" src="/images/alipay.png" alt="支付宝">
+            </label>
+            
+        </div>
+    </div>
+</div>
+
+
+        
+    </div>
+    <footer class="article-footer">
+        
+        
+<div class="post-share">
+    <a href="javascript:;" id="share-sub" class="post-share-fab">
+        <i class="fa fa-share-alt"></i>
+    </a>
+    <div class="post-share-list" id="share-list">
+        <ul class="share-icons">
+          <li>
+            <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=https://radicalfive.github.io/2021/11/09/%E5%8F%8D%E5%B0%84%E8%AF%A6%E8%A7%A3/&title=如困兽之斗&pic=https://Radicalfive.github.ioimages/logo.png" data-title="微博">
+              <i class="fa fa-weibo"></i>
+            </a>
+          </li>
+          <li>
+            <a class="weixin share-sns" id="wxFab" href="javascript:;" data-title="微信">
+              <i class="fa fa-weixin"></i>
+            </a>
+          </li>
+          <li>
+            <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https://radicalfive.github.io/2021/11/09/%E5%8F%8D%E5%B0%84%E8%AF%A6%E8%A7%A3/&title=如困兽之斗&source=基于GitHub的个人博客" data-title="QQ">
+              <i class="fa fa-qq"></i>
+            </a>
+          </li>
+          <li>
+            <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://radicalfive.github.io/2021/11/09/%E5%8F%8D%E5%B0%84%E8%AF%A6%E8%A7%A3/" data-title="Facebook">
+              <i class="fa fa-facebook"></i>
+            </a>
+          </li>
+          <li>
+            <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=如困兽之斗&url=https://radicalfive.github.io/2021/11/09/%E5%8F%8D%E5%B0%84%E8%AF%A6%E8%A7%A3/&via=https://Radicalfive.github.io" data-title="Twitter">
+              <i class="fa fa-twitter"></i>
+            </a>
+          </li>
+          <li>
+            <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https://radicalfive.github.io/2021/11/09/%E5%8F%8D%E5%B0%84%E8%AF%A6%E8%A7%A3/" data-title="Google+">
+              <i class="fa fa-google-plus"></i>
+            </a>
+          </li>
+        </ul>
+     </div>
+</div>
+<div class="post-modal wx-share" id="wxShare">
+    <a class="close" href="javascript:;" id="wxShare-close">×</a>
+    <p>扫一扫，分享到微信</p>
+    <img src="//api.qrserver.com/v1/create-qr-code/?data=https://radicalfive.github.io/2021/11/09/%E5%8F%8D%E5%B0%84%E8%AF%A6%E8%A7%A3/" alt="微信分享二维码">
+</div>
+
+<div class="mask"></div>
+
+        
+        <ul class="article-footer-menu">
+            
+            
+        </ul>
+        
+    </footer>
+  </div>
+</article>
+
+
+    <aside class="post-toc-pos post-toc-top" id="post-toc">
+        <nav class="post-toc-wrap">
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#%E4%B8%80%E3%80%81%E7%B1%BB%E7%9A%84%E5%8A%A0%E8%BD%BD%E4%B8%8EClassLoader%E7%9A%84%E7%90%86%E8%A7%A3"><span class="post-toc-text">一、类的加载与ClassLoader的理解</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#1%E3%80%81%E5%8A%A0%E8%BD%BD"><span class="post-toc-text">1、加载</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#2%E3%80%81%E9%93%BE%E6%8E%A5"><span class="post-toc-text">2、链接</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#3%E3%80%81%E5%88%9D%E5%A7%8B%E5%8C%96"><span class="post-toc-text">3、初始化</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#%E4%BA%8C%E3%80%81%E4%BB%80%E4%B9%88%E6%97%B6%E5%80%99%E4%BC%9A%E5%8F%91%E7%94%9F%E7%B1%BB%E5%88%9D%E5%A7%8B%E5%8C%96"><span class="post-toc-text">二、什么时候会发生类初始化</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#1%E3%80%81%E7%B1%BB%E7%9A%84%E4%B8%BB%E5%8A%A8%E5%BC%95%E7%94%A8%EF%BC%88%E4%B8%80%E5%AE%9A%E4%BC%9A%E5%8F%91%E7%94%9F%E7%B1%BB%E7%9A%84%E5%88%9D%E5%A7%8B%E5%8C%96%EF%BC%89"><span class="post-toc-text">1、类的主动引用（一定会发生类的初始化）</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#2%E3%80%81%E7%B1%BB%E7%9A%84%E8%A2%AB%E5%8A%A8%E8%B0%83%E7%94%A8%EF%BC%88%E4%B8%8D%E4%BC%9A%E5%8F%91%E7%94%9F%E7%B1%BB%E7%9A%84%E5%88%9D%E5%A7%8B%E5%8C%96%EF%BC%89"><span class="post-toc-text">2、类的被动调用（不会发生类的初始化）</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#%E4%B8%89%E3%80%81%E7%B1%BB%E5%8A%A0%E8%BD%BD%E5%99%A8%E7%9A%84%E4%BD%9C%E7%94%A8"><span class="post-toc-text">三、类加载器的作用</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#%E5%9B%9B%E3%80%81%E5%8A%A8%E6%80%81%E5%88%9B%E5%BB%BA%E5%AF%B9%E8%B1%A1%E6%89%A7%E8%A1%8C%E6%96%B9%E6%B3%95"><span class="post-toc-text">四、动态创建对象执行方法</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#%E4%BA%94%E3%80%81%E9%80%9A%E8%BF%87%E5%8F%8D%E5%B0%84%E8%8E%B7%E5%8F%96%E6%B3%9B%E5%9E%8B%E4%BF%A1%E6%81%AF"><span class="post-toc-text">五、通过反射获取泛型信息</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#1%E3%80%81%E4%BB%A3%E7%A0%81%E5%AE%9E%E4%BE%8B"><span class="post-toc-text">1、代码实例</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#2-%E8%BE%93%E5%87%BA%E7%BB%93%E6%9E%9C"><span class="post-toc-text">2. 输出结果</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#3%E3%80%81%E5%8F%8D%E5%B0%84%E8%A7%A3%E5%86%B3%E6%B3%9B%E5%9E%8B%E9%97%AE%E9%A2%98"><span class="post-toc-text">3、反射解决泛型问题</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#%E5%85%AD%E3%80%81%E9%80%9A%E8%BF%87%E5%8F%8D%E5%B0%84%E8%8E%B7%E5%8F%96%E6%B3%A8%E8%A7%A3%E4%BF%A1%E6%81%AF"><span class="post-toc-text">六、通过反射获取注解信息</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#1%E3%80%81%E4%BB%A3%E7%A0%81%E5%AE%9E%E4%BE%8B-1"><span class="post-toc-text">1、代码实例</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#2%E3%80%81%E8%BE%93%E5%87%BA%E7%BB%93%E6%9E%9C"><span class="post-toc-text">2、输出结果</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#%E4%B8%83%E3%80%81%E9%80%9A%E8%BF%87%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6%E5%8A%A8%E6%80%81%E8%B0%83%E7%94%A8%E6%96%B9%E6%B3%95"><span class="post-toc-text">七、通过配置文件动态调用方法</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#1%E3%80%81%E5%9C%A8%E9%A1%B9%E7%9B%AE%E6%A0%B9%E7%9B%AE%E5%BD%95%E6%96%B0%E5%BB%BAClass-txt%E6%96%87%E4%BB%B6"><span class="post-toc-text">1、在项目根目录新建Class.txt文件</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#2%E3%80%81%E5%BB%BA%E4%B8%80%E4%B8%AAPerson%E7%B1%BB"><span class="post-toc-text">2、建一个Person类</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#3%E3%80%81%E9%80%9A%E8%BF%87%E5%8F%8D%E5%B0%84%E8%8E%B7%E5%8F%96%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6%E4%B8%AD%E5%86%85%E5%AE%B9%E8%B0%83%E7%94%A8%E7%B1%BB%E4%B8%AD%E6%96%B9%E6%B3%95"><span class="post-toc-text">3、通过反射获取配置文件中内容调用类中方法</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#4%E3%80%81%E8%BE%93%E5%87%BA%E7%BB%93%E6%9E%9C"><span class="post-toc-text">4、输出结果</span></a></li></ol></li></ol>
+        </nav>
+    </aside>
+    
+
+<nav id="article-nav">
+  
+  
+    <a href="/2021/11/08/Java%E4%B8%AD%E7%9A%84%E5%BC%82%E5%B8%B8%E4%BD%93%E7%B3%BB/" id="article-nav-older" class="article-nav-link-wrap">
+      <span class="article-nav-title"></span>
+      <i class="fa fa-hand-o-right" aria-hidden="true"></i>
+    </a>
+  
+</nav>
+
+
+
+    
+        <div id="SOHUCS" sid="反射详解" ></div>
+<script type="text/javascript">
+    (function(){
+        var appid = 'true';
+        var conf = 'true';
+        var width = window.innerWidth || document.documentElement.clientWidth;
+        if (width < 960) {
+            window.document.write('<script id="changyan_mobile_js" charset="utf-8" type="text/javascript" src="https://changyan.sohu.com/upload/mobile/wap-js/changyan_mobile.js?client_id=' + appid + '&conf=' + conf + '"><\/script>'); } else { var loadJs=function(d,a){var c=document.getElementsByTagName("head")[0]||document.head||document.documentElement;var b=document.createElement("script");b.setAttribute("type","text/javascript");b.setAttribute("charset","UTF-8");b.setAttribute("src",d);if(typeof a==="function"){if(window.attachEvent){b.onreadystatechange=function(){var e=b.readyState;if(e==="loaded"||e==="complete"){b.onreadystatechange=null;a()}}}else{b.onload=a}}c.appendChild(b)};loadJs("https://changyan.sohu.com/upload/changyan.js",function(){window.changyan.api.config({appid:appid,conf:conf})}); } })(); </script>
+    
+</section>
+        
+      </div>
+      <footer id="footer">
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      
+<p>
+    <span id="busuanzi_container_site_uv" style='display:none'>
+        总访客数：<span id="busuanzi_value_site_uv"></span>
+    </span>
+    <span id="busuanzi_container_site_pv" style='display:none'>
+        总访问量：<span id="busuanzi_value_site_pv"></span>
+    </span>
+</p>
+
+
+      <p>
+        Powered by  <a href="http://hexo.io/" target="_blank">Hexo</a>
+        Theme <a href="//github.com/wongminho/hexo-theme-miho" target="_blank">MiHo</a>
+      &copy; 2021 Radical<br>
+      </p>
+    </div>
+  </div>
+</footer>
+    <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+<script src="//cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
+<script>
+  var mihoConfig = {
+      root: "https://Radicalfive.github.io",
+      animate: true,
+      isHome: false,
+      share: true,
+      reward: 1
+  }
+</script>
+<div class="sidebar">
+    <div id="sidebar-search" title="Search">
+        <i class="fa fa-search"></i>
+    </div>
+    <div id="sidebar-category" title="Categories">
+        <i class="fa fa-book"></i>
+    </div>
+    <div id="sidebar-tag" title="Tags">
+        <i class="fa fa-tags"></i>
+    </div>
+    <div id="sidebar-top">
+        <span class="sidebar-top-icon"><i class="fa fa-angle-up"></i></span>
+    </div>
+</div>
+<div class="sidebar-menu-box" id="sidebar-menu-box">
+    <div class="sidebar-menu-box-container">
+        <div id="sidebar-menu-box-categories">
+            
+        </div>
+        <div id="sidebar-menu-box-tags">
+            <a href="/tags/git-Git/" style="font-size: 10px;">git,Git</a>
+        </div>
+    </div>
+    <a href="javascript:;" class="sidebar-menu-box-close">&times;</a>
+</div>
+<div class="mobile-header-menu-nav" id="mobile-header-menu-nav">
+    <div class="mobile-header-menu-container">
+        <span class="title">Menus</span>
+        <ul class="mobile-header-menu-navbar">
+            
+            <li>
+                <a  href="/">
+                    <i class="fa fa-home"></i><span>Home</span>
+                </a>
+            </li>
+            
+            <li>
+                <a  href="/archives">
+                    <i class="fa fa-archive"></i><span>Archives</span>
+                </a>
+            </li>
+            
+            <li>
+                <a  href="/about">
+                    <i class="fa fa-user"></i><span>About</span>
+                </a>
+            </li>
+            
+        </ul>
+    </div>
+    <div class="mobile-header-tag-container">
+        <span class="title">Tags</span>
+        <div id="mobile-header-container-tags">
+            <a href="/tags/git-Git/" style="font-size: 10px;">git,Git</a>
+        </div>
+    </div>
+</div>
+<div class="search-wrap">
+    <span class="search-close">&times;</span>
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+            <i class="icon icon-lg icon-chevron-left"></i>
+        </a>
+        <input class="search-field" placeholder="Search..." id="keywords">
+        <a id="search-submit" href="javascript:;">
+            <i class="fa fa-search"></i>
+        </a>
+    <div class="search-container" id="search-container">
+        <ul class="search-result" id="search-result">
+        </ul>
+    </div>
+</div>
+
+<div id="search-tpl">
+    <li class="search-result-item">
+        <a href="{url}" class="search-item-li">
+            <span class="search-item-li-title" title="{title}">{title}</span>
+        </a>
+    </li>
+</div>
+
+<script src="/js/search.js"></script>
+
+
+<script src="/js/main.js"></script>
+
+
+
+  <script src="//cdn.bootcss.com/particles.js/2.0.0/particles.min.js"></script>
+  <div id="particles"></div>
+  
+<script src="/js/particles.js"></script>
+
+
+
+
+
+
+
+
+  
+<link rel="stylesheet" href="//cdn.bootcss.com/animate.css/3.5.0/animate.min.css">
+
+  <script src="//cdn.bootcss.com/scrollReveal.js/3.0.5/scrollreveal.js"></script>
+  
+<script src="/js/animate.js"></script>
+
+
+
+  
+<script src="/js/pop-img.js"></script>
+
+  <script>
+     $(".article-entry p img").popImg();
+  </script>
+
+  </div>
+</body>
+</html>
