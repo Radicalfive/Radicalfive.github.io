@@ -1,0 +1,256 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"><title>RadicalFive | RadicalFive</title><meta name="author" content="Radical,1561548288@qq.com"><meta name="copyright" content="Radical"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="前端编程规范解决方案为什么需要编程规范？  团队开发，没有统一的代码标准，呈现出各种乱象   需求：让程序自动处理规范化的内容   编码规范 git规范   编程规范一：代码检测工具ESLintESLint 是 2013年6月创建的一个开源项目，它的目标非常简单，只有一个，那就是提供一个插件化的 javascript 代码检测工具，说白了就是做代码格式检测使用的  eslint 的配置文件：.es">
+<meta property="og:type" content="article">
+<meta property="og:title" content="RadicalFive">
+<meta property="og:url" content="http://example.com/2022/09/04/%E5%89%8D%E7%AB%AF%E7%BC%96%E7%A8%8B%E8%A7%84%E8%8C%83%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88/index.html">
+<meta property="og:site_name" content="RadicalFive">
+<meta property="og:description" content="前端编程规范解决方案为什么需要编程规范？  团队开发，没有统一的代码标准，呈现出各种乱象   需求：让程序自动处理规范化的内容   编码规范 git规范   编程规范一：代码检测工具ESLintESLint 是 2013年6月创建的一个开源项目，它的目标非常简单，只有一个，那就是提供一个插件化的 javascript 代码检测工具，说白了就是做代码格式检测使用的  eslint 的配置文件：.es">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://ossstored.oss-cn-shanghai.aliyuncs.com/bg/1efbb55e880711ebb6edd017c2d2eca2.jpg">
+<meta property="article:published_time" content="2022-09-04T11:51:54.160Z">
+<meta property="article:modified_time" content="2022-04-29T08:20:08.393Z">
+<meta property="article:author" content="Radical">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://ossstored.oss-cn-shanghai.aliyuncs.com/bg/1efbb55e880711ebb6edd017c2d2eca2.jpg"><link rel="shortcut icon" href="/img/favicon.png"><link rel="canonical" href="http://example.com/2022/09/04/%E5%89%8D%E7%AB%AF%E7%BC%96%E7%A8%8B%E8%A7%84%E8%8C%83%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88/"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/node-snackbar/dist/snackbar.min.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox.min.css" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = { 
+  root: '/',
+  algolia: undefined,
+  localSearch: undefined,
+  translate: undefined,
+  noticeOutdate: undefined,
+  highlight: {"plugin":"highlighjs","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '',
+  date_suffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: undefined,
+  lightbox: 'fancybox',
+  Snackbar: {"chs_to_cht":"你已切换为繁体","cht_to_chs":"你已切换为简体","day_to_night":"你已切换为深色模式","night_to_day":"你已切换为浅色模式","bgLight":"#49b1f5","bgDark":"#1f1f1f","position":"bottom-right"},
+  source: {
+    justifiedGallery: {
+      js: 'https://cdn.jsdelivr.net/npm/flickr-justified-gallery/dist/fjGallery.min.js',
+      css: 'https://cdn.jsdelivr.net/npm/flickr-justified-gallery/dist/fjGallery.min.css'
+    }
+  },
+  isPhotoFigcaption: false,
+  islazyload: false,
+  isAnchor: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: 'RadicalFive',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: true,
+  postUpdate: '2022-04-29 16:20:08'
+}</script><noscript><style type="text/css">
+  #nav {
+    opacity: 1
+  }
+  .justified-gallery img {
+    opacity: 1
+  }
+
+  #recent-posts time,
+  #post-meta time {
+    display: inline !important
+  }
+</style></noscript><script>(win=>{
+    win.saveToLocal = {
+      set: function setWithExpiry(key, value, ttl) {
+        if (ttl === 0) return
+        const now = new Date()
+        const expiryDay = ttl * 86400000
+        const item = {
+          value: value,
+          expiry: now.getTime() + expiryDay,
+        }
+        localStorage.setItem(key, JSON.stringify(item))
+      },
+
+      get: function getWithExpiry(key) {
+        const itemStr = localStorage.getItem(key)
+
+        if (!itemStr) {
+          return undefined
+        }
+        const item = JSON.parse(itemStr)
+        const now = new Date()
+
+        if (now.getTime() > item.expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return item.value
+      }
+    }
+  
+    win.getScript = url => new Promise((resolve, reject) => {
+      const script = document.createElement('script')
+      script.src = url
+      script.async = true
+      script.onerror = reject
+      script.onload = script.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        script.onload = script.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(script)
+    })
+  
+      win.activateDarkMode = function () {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      win.activateLightMode = function () {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+          if (t === 'dark') activateDarkMode()
+          else if (t === 'light') activateLightMode()
+        
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    
+    const detectApple = () => {
+      if(/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+    })(window)</script><meta name="generator" content="Hexo 6.2.0"></head><body><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src="https://ossstored.oss-cn-shanghai.aliyuncs.com/avatar-boy/11.jpg" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="sidebar-site-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">2</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">0</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">0</div></a></div><hr/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 事件轴</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><i class="fa-fw fa fa-heartbeat"></i><span> 清单</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/music/"><i class="fa-fw fas fa-music"></i><span> 音乐</span></a></li><li><a class="site-page child" href="/Gallery/"><i class="fa-fw fas fa-images"></i><span> 照片</span></a></li><li><a class="site-page child" href="/movies/"><i class="fa-fw fas fa-video"></i><span> 电影</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友链</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url('https://ossstored.oss-cn-shanghai.aliyuncs.com/bg/1efbb55e880711ebb6edd017c2d2eca2.jpg')"><nav id="nav"><span id="blog_name"><a id="site-name" href="/">RadicalFive</a></span><div id="menus"><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 事件轴</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><i class="fa-fw fa fa-heartbeat"></i><span> 清单</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/music/"><i class="fa-fw fas fa-music"></i><span> 音乐</span></a></li><li><a class="site-page child" href="/Gallery/"><i class="fa-fw fas fa-images"></i><span> 照片</span></a></li><li><a class="site-page child" href="/movies/"><i class="fa-fw fas fa-video"></i><span> 电影</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友链</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div><div id="toggle-menu"><a class="site-page"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="post-info"><h1 class="post-title">无题</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2022-09-04T11:51:54.160Z" title="发表于 2022-09-04 19:51:54">2022-09-04</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2022-04-29T08:20:08.393Z" title="更新于 2022-04-29 16:20:08">2022-04-29</time></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title=""><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">阅读量:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container"><h1 id="前端编程规范解决方案"><a href="#前端编程规范解决方案" class="headerlink" title="前端编程规范解决方案"></a>前端编程规范解决方案</h1><h2 id="为什么需要编程规范？"><a href="#为什么需要编程规范？" class="headerlink" title="为什么需要编程规范？"></a>为什么需要编程规范？</h2><blockquote>
+<p> 团队开发，没有统一的代码标准，呈现出各种乱象 </p>
+<p> 需求：让程序自动处理规范化的内容 </p>
+<ol>
+<li>编码规范</li>
+<li>git规范</li>
+</ol>
+</blockquote>
+<h2 id="编程规范一：代码检测工具ESLint"><a href="#编程规范一：代码检测工具ESLint" class="headerlink" title="编程规范一：代码检测工具ESLint"></a>编程规范一：代码检测工具<code>ESLint</code></h2><p><code>ESLint</code> 是 2013年6月创建的一个开源项目，它的目标非常简单，只有一个，那就是提供一个插件化的 <code>javascript</code> 代码检测工具，说白了就是做代码格式检测使用的</p>
+<p> <strong><code>eslint</code> 的配置文件：<code>.eslintrc.js</code></strong> </p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="variable language_">module</span>.<span class="property">exports</span> = &#123;</span><br><span class="line">  <span class="attr">root</span>: <span class="literal">true</span>,</span><br><span class="line">  <span class="attr">env</span>: &#123;</span><br><span class="line">    <span class="attr">node</span>: <span class="literal">true</span></span><br><span class="line">  &#125;,</span><br><span class="line">  <span class="attr">extends</span>: [<span class="string">&#x27;plugin:vue/vue3-essential&#x27;</span>, <span class="string">&#x27;@vue/standard&#x27;</span>],</span><br><span class="line">  <span class="attr">parserOptions</span>: &#123;</span><br><span class="line">    <span class="attr">parser</span>: <span class="string">&#x27;@babel/eslint-parser&#x27;</span>,</span><br><span class="line">    <span class="attr">requireConfigFile</span>: <span class="literal">false</span></span><br><span class="line">  &#125;,</span><br><span class="line">  <span class="attr">rules</span>: &#123;</span><br><span class="line">    <span class="string">&#x27;no-console&#x27;</span>: process.<span class="property">env</span>.<span class="property">NODE_ENV</span> === <span class="string">&#x27;production&#x27;</span> ? <span class="string">&#x27;warn&#x27;</span> : <span class="string">&#x27;off&#x27;</span>,</span><br><span class="line">    <span class="string">&#x27;no-debugger&#x27;</span>: process.<span class="property">env</span>.<span class="property">NODE_ENV</span> === <span class="string">&#x27;production&#x27;</span> ? <span class="string">&#x27;warn&#x27;</span> : <span class="string">&#x27;off&#x27;</span>,</span><br><span class="line">    <span class="string">&#x27;space-before-function-paren&#x27;</span>: <span class="string">&#x27;off&#x27;</span>,</span><br><span class="line">    <span class="string">&#x27;vue/multi-word-component-names&#x27;</span>: <span class="string">&#x27;off&#x27;</span></span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="编程规范二：代码格式工具Prettier"><a href="#编程规范二：代码格式工具Prettier" class="headerlink" title="编程规范二：代码格式工具Prettier"></a>编程规范二：代码格式工具<code>Prettier</code></h2><ol>
+<li>一个代码格式化工具</li>
+<li>开箱即用</li>
+<li>可以直接集成在VSCode中</li>
+<li><img src="https://cdn.jsdelivr.net/gh/Radicalfive/MK-image@master/image.5a1vwbr7uso0.webp" alt="image"></li>
+<li>保存时让代码直接符合ESLint标准（需要通过一些简单配置）</li>
+<li><a target="_blank" rel="noopener" href="https://www.prettier.cn/">https://www.prettier.cn/</a></li>
+</ol>
+<h3 id="ESLint与Prettier配合解决代码格式问题"><a href="#ESLint与Prettier配合解决代码格式问题" class="headerlink" title="ESLint与Prettier配合解决代码格式问题"></a><code>ESLint</code>与<code>Prettier</code>配合解决代码格式问题</h3><ol>
+<li>安装<code>ESLint</code>和<code>Prettier</code>插件</li>
+<li>新建<code>.Prettier</code>文件，该文件为<code>Prettier</code>默认配置文件，配置基本的规则</li>
+</ol>
+<figure class="highlight json"><table><tr><td class="code"><pre><span class="line"><span class="punctuation">&#123;</span></span><br><span class="line">  <span class="attr">&quot;printWidth&quot;</span><span class="punctuation">:</span> <span class="number">120</span><span class="punctuation">,</span></span><br><span class="line">  <span class="attr">&quot;semi&quot;</span><span class="punctuation">:</span> <span class="literal"><span class="keyword">false</span></span><span class="punctuation">,</span></span><br><span class="line">  <span class="attr">&quot;singleQuote&quot;</span><span class="punctuation">:</span><span class="literal"><span class="keyword">true</span></span><span class="punctuation">,</span></span><br><span class="line">  <span class="attr">&quot;trailingComma&quot;</span><span class="punctuation">:</span> <span class="string">&quot;none&quot;</span></span><br><span class="line"><span class="punctuation">&#125;</span></span><br></pre></td></tr></table></figure>
+
+<ol start="3">
+<li><p>VS Code配置 </p>
+<ol>
+<li>Format On Save</li>
+</ol>
+<p><img src="https://cdn.jsdelivr.net/gh/Radicalfive/MK-image@master/image.21ny3oguwwcg.webp" alt="image"></p>
+<ol start="2">
+<li>设置一个tab为2个空格</li>
+</ol>
+<p><img src="https://cdn.jsdelivr.net/gh/Radicalfive/MK-image@master/image.593f91yb8go0.webp" alt="image"></p>
+</li>
+<li><p><code>ESLint</code>与<code>Prettier</code>的冲突问题</p>
+<ol>
+<li>方法名和后面的小括号之间，应该有一个空格 </li>
+<li>修改 <code>.eslintrc.js&#39;space-before-function-paren&#39;: &#39;off&#39;</code>关闭《方法名后增加空格》的规则</li>
+</ol>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="string">&#x27;space-before-function-paren&#x27;</span>:<span class="string">&#x27;off&#x27;</span> #关闭《方法名后增加空格》的规则</span><br></pre></td></tr></table></figure></li>
+</ol>
+<h2 id="编程规范三：约定式提交规范"><a href="#编程规范三：约定式提交规范" class="headerlink" title="编程规范三：约定式提交规范"></a>编程规范三：约定式提交规范</h2><blockquote>
+<p> Angular团队规范延伸出的 Conventional Commits specification（约定式提交）</p>
+</blockquote>
+<p><img src="https://cdn.jsdelivr.net/gh/Radicalfive/MK-image@master/image.2xxtm0404ng0.webp" alt="image"></p>
+<p>其中 <type> 类型，必须是一个可选的值，比如：</p>
+<ol>
+<li>新功能：feat</li>
+<li>修复：fix</li>
+<li>文档变更：docs</li>
+<li>….</li>
+</ol>
+<h3 id="Commitizen帮助我们规范化提交代码"><a href="#Commitizen帮助我们规范化提交代码" class="headerlink" title="Commitizen帮助我们规范化提交代码"></a><code>Commitizen</code>帮助我们规范化提交代码</h3><blockquote>
+<p>git 提交规范化工具：<code>commitizen </code></p>
+</blockquote>
+<p><strong>安装</strong></p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">npm install -g commitizen // 全局安装Commitizen</span><br><span class="line">npm install cz-customizable@6.3.0 --save-dev // 项目内安装cz-customizable</span><br></pre></td></tr></table></figure>
+
+<p>在package.json中配置commitizen：</p>
+<figure class="highlight json"><table><tr><td class="code"><pre><span class="line"><span class="attr">&quot;config&quot;</span><span class="punctuation">:</span> <span class="punctuation">&#123;</span></span><br><span class="line">  <span class="attr">&quot;commitizen&quot;</span><span class="punctuation">:</span> <span class="punctuation">&#123;</span></span><br><span class="line">    <span class="attr">&quot;path&quot;</span><span class="punctuation">:</span> <span class="string">&quot;node_modules/cz-customizable&quot;</span></span><br><span class="line">  <span class="punctuation">&#125;</span></span><br><span class="line"><span class="punctuation">&#125;</span></span><br></pre></td></tr></table></figure>
+
+<p><img src="https://cdn.jsdelivr.net/gh/Radicalfive/MK-image@master/image.30ti6nbwtvw0.webp" alt="image"></p>
+<p>项目根目录下创建<code>.cz-config.js</code>自定义提示文件</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="variable language_">module</span>.<span class="property">exports</span> = &#123;</span><br><span class="line">  <span class="comment">// 可选类型</span></span><br><span class="line">  <span class="attr">types</span>: [</span><br><span class="line">    &#123; <span class="attr">value</span>: <span class="string">&#x27;feat&#x27;</span>, <span class="attr">name</span>: <span class="string">&#x27;feat:     新功能&#x27;</span> &#125;,</span><br><span class="line">    &#123; <span class="attr">value</span>: <span class="string">&#x27;fix&#x27;</span>, <span class="attr">name</span>: <span class="string">&#x27;fix:      修复&#x27;</span> &#125;,</span><br><span class="line">    &#123; <span class="attr">value</span>: <span class="string">&#x27;docs&#x27;</span>, <span class="attr">name</span>: <span class="string">&#x27;docs:     文档变更&#x27;</span> &#125;,</span><br><span class="line">    &#123; <span class="attr">value</span>: <span class="string">&#x27;style&#x27;</span>, <span class="attr">name</span>: <span class="string">&#x27;style:    代码格式(不影响代码运行的变动)&#x27;</span> &#125;,</span><br><span class="line">    &#123;</span><br><span class="line">      <span class="attr">value</span>: <span class="string">&#x27;refactor&#x27;</span>,</span><br><span class="line">      <span class="attr">name</span>: <span class="string">&#x27;refactor: 重构(既不是增加feature，也不是修复bug)&#x27;</span></span><br><span class="line">    &#125;,</span><br><span class="line">    &#123; <span class="attr">value</span>: <span class="string">&#x27;perf&#x27;</span>, <span class="attr">name</span>: <span class="string">&#x27;perf:     性能优化&#x27;</span> &#125;,</span><br><span class="line">    &#123; <span class="attr">value</span>: <span class="string">&#x27;test&#x27;</span>, <span class="attr">name</span>: <span class="string">&#x27;test:     增加测试&#x27;</span> &#125;,</span><br><span class="line">    &#123; <span class="attr">value</span>: <span class="string">&#x27;chore&#x27;</span>, <span class="attr">name</span>: <span class="string">&#x27;chore:    构建过程或辅助工具的变动&#x27;</span> &#125;,</span><br><span class="line">    &#123; <span class="attr">value</span>: <span class="string">&#x27;revert&#x27;</span>, <span class="attr">name</span>: <span class="string">&#x27;revert:   回退&#x27;</span> &#125;,</span><br><span class="line">    &#123; <span class="attr">value</span>: <span class="string">&#x27;build&#x27;</span>, <span class="attr">name</span>: <span class="string">&#x27;build:    打包&#x27;</span> &#125;</span><br><span class="line">  ],</span><br><span class="line">  <span class="comment">// 消息步骤</span></span><br><span class="line">  <span class="attr">messages</span>: &#123;</span><br><span class="line">    <span class="attr">type</span>: <span class="string">&#x27;请选择提交类型:&#x27;</span>,</span><br><span class="line">    <span class="attr">customScope</span>: <span class="string">&#x27;请输入修改范围(可选):&#x27;</span>,</span><br><span class="line">    <span class="attr">subject</span>: <span class="string">&#x27;请简要描述提交(必填):&#x27;</span>,</span><br><span class="line">    <span class="attr">body</span>: <span class="string">&#x27;请输入详细描述(可选):&#x27;</span>,</span><br><span class="line">    <span class="attr">footer</span>: <span class="string">&#x27;请输入要关闭的issue(可选):&#x27;</span>,</span><br><span class="line">    <span class="attr">confirmCommit</span>: <span class="string">&#x27;确认使用以上信息提交？(y/n/e/h)&#x27;</span></span><br><span class="line">  &#125;,</span><br><span class="line">  <span class="comment">// 跳过问题</span></span><br><span class="line">  <span class="attr">skipQuestions</span>: [<span class="string">&#x27;body&#x27;</span>, <span class="string">&#x27;footer&#x27;</span>],</span><br><span class="line">  <span class="comment">// subject文字长度默认是72</span></span><br><span class="line">  <span class="attr">subjectLimit</span>: <span class="number">72</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>使用<code>git cz</code>代替<code>git commit</code>实现规范化的提交</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line">commit-msg <span class="comment">//用来规范化标准格式，并且可以按需指定是否要拒绝本次提交</span></span><br><span class="line">pre-commit <span class="comment">//会在提交前被调用，并且可以按需指定是否要拒绝本次提交</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="学习使用-Git-Hooks"><a href="#学习使用-Git-Hooks" class="headerlink" title="学习使用 Git Hooks "></a>学习使用 <code>Git Hooks </code></h3><p> 我们希望：当《提交描述信息》不符合约定式提交规范的时候，阻止当前的提交，并抛出对应的错误提示Git hooks（git 钩子 || git 回调方法）：也就是：git 在执行某个事件之前或之后进行一些其他额外的操作阻止不合规的提交消息，需要使用到 hooks 的钩子函数 </p>
+<p><a target="_blank" rel="noopener" href="https://git-scm.com/docs/githooks">官方文档</a></p>
+<h3 id="使用husky-commitlint检查提交描述是否符合规范要求"><a href="#使用husky-commitlint检查提交描述是否符合规范要求" class="headerlink" title="使用husky+commitlint检查提交描述是否符合规范要求"></a>使用<code>husky</code>+<code>commitlint</code>检查提交描述是否符合规范要求</h3><ol>
+<li><p><code>commitlint</code> –&gt; 用于检查提交信息 </p>
+</li>
+<li><p><code>husky</code>  –&gt;  git hooks工具</p>
+</li>
+</ol>
+<p><strong>安装<code>commitlint：</code></strong></p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">npm install --save-dev @commitlint/config-conventional@12.1.4 @commitlint/cli@12.1.4</span><br></pre></td></tr></table></figure>
+
+<p>创建 <code>commitlint.config.js</code> 文件：</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="variable language_">module</span>.<span class="property">exports</span> = &#123;</span><br><span class="line">  <span class="comment">// 继承的规则</span></span><br><span class="line">  <span class="attr">extends</span>: [<span class="string">&#x27;@commitlint/config-conventional&#x27;</span>],</span><br><span class="line">  <span class="comment">// 定义规则类型</span></span><br><span class="line">  <span class="attr">rules</span>: &#123;</span><br><span class="line">    <span class="comment">// type 类型定义，表示 git 提交的 type 必须在以下类型范围内</span></span><br><span class="line">    <span class="string">&#x27;type-enum&#x27;</span>: [</span><br><span class="line">      <span class="number">2</span>, <span class="comment">// 当前验证的错误级别</span></span><br><span class="line">      <span class="string">&#x27;always&#x27;</span>, <span class="comment">// 在什么情况下进行验证</span></span><br><span class="line">      [</span><br><span class="line">        <span class="string">&#x27;feat&#x27;</span>, <span class="comment">// 新功能 feature</span></span><br><span class="line">        <span class="string">&#x27;fix&#x27;</span>, <span class="comment">// 修复 bug</span></span><br><span class="line">        <span class="string">&#x27;docs&#x27;</span>, <span class="comment">// 文档注释</span></span><br><span class="line">        <span class="string">&#x27;style&#x27;</span>, <span class="comment">// 代码格式(不影响代码运行的变动)</span></span><br><span class="line">        <span class="string">&#x27;refactor&#x27;</span>, <span class="comment">// 重构(既不增加新功能，也不是修复bug)</span></span><br><span class="line">        <span class="string">&#x27;perf&#x27;</span>, <span class="comment">// 性能优化</span></span><br><span class="line">        <span class="string">&#x27;test&#x27;</span>, <span class="comment">// 增加测试</span></span><br><span class="line">        <span class="string">&#x27;chore&#x27;</span>, <span class="comment">// 构建过程或辅助工具的变动</span></span><br><span class="line">        <span class="string">&#x27;revert&#x27;</span>, <span class="comment">// 回退</span></span><br><span class="line">        <span class="string">&#x27;build&#x27;</span> <span class="comment">// 打包</span></span><br><span class="line">      ]</span><br><span class="line">    ],</span><br><span class="line">    <span class="comment">// subject 大小写是否做校验</span></span><br><span class="line">    <span class="string">&#x27;subject-case&#x27;</span>: [<span class="number">0</span>]</span><br><span class="line">  &#125;</span><br><span class="line">&#125;&lt;br&gt;<span class="comment">// 注意：保存时一定要是UTF-8</span></span><br></pre></td></tr></table></figure>
+
+<p>安装步骤</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">npm install husky --save-dev // 安装husky：</span><br><span class="line">npx husky install // 启动hooks，生成.husky文件夹：</span><br><span class="line">npm set-script prepare <span class="string">&quot;husky install&quot;</span> // 设置husky脚本</span><br><span class="line">npm run prepare // 运行</span><br></pre></td></tr></table></figure>
+
+<p>添加 <code>commitlint</code> 的 hook 到 husky中，并指令在 <code>commit-msg</code> 的 hooks 下执行 <code>npx --no-install commitlint --edit &quot;$1&quot;</code> 指令：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">npx husky add .husky/commit-msg <span class="string">&#x27;npx --no-install commitlint --edit &quot;$1&quot;&#x27;</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="通过pre-commit检测提交时代码规范"><a href="#通过pre-commit检测提交时代码规范" class="headerlink" title="通过pre-commit检测提交时代码规范"></a>通过<code>pre-commit</code>检测提交时代码规范</h3><ul>
+<li><p><code>ESLint</code> 与 <code>Prettier</code> 配合解决代码格式问题，只是在本地解决了代码格式化问题。 </p>
+</li>
+<li><p>使用 husky 配合 <code>eslint </code> </p>
+</li>
+<li><p>通过 husky 监测 <code>pre-commit</code> 钩子</p>
+</li>
+</ul>
+<h3 id="lint-staged自动修复格式错误"><a href="#lint-staged自动修复格式错误" class="headerlink" title="lint-staged自动修复格式错误"></a>lint-staged自动修复格式错误</h3><ul>
+<li><p>lint-staged 可以让你当前的代码检查只检查本次修改更新的代码，并在出现错误的时候，自动修复并且推送 </p>
+</li>
+<li><p>lint-staged 无需单独安装，生成项目时，<code>vue-cli</code> 已经帮助我们安装过了，所以我们直接使用就可以了 </p>
+</li>
+<li><p>修改 <code>package.json</code> 配置</p>
+</li>
+</ul>
+<figure class="highlight json"><table><tr><td class="code"><pre><span class="line"><span class="attr">&quot;lint-staged&quot;</span><span class="punctuation">:</span> <span class="punctuation">&#123;</span></span><br><span class="line">    <span class="attr">&quot;src/**/*.&#123;js,vue&#125;&quot;</span><span class="punctuation">:</span> <span class="punctuation">[</span></span><br><span class="line">        <span class="string">&quot;eslint --fix&quot;</span><span class="punctuation">,</span></span><br><span class="line">        <span class="string">&quot;git add&quot;</span></span><br><span class="line">    <span class="punctuation">]</span></span><br><span class="line"><span class="punctuation">&#125;</span><span class="punctuation">,</span></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>修改 <code>.husky/pre-commit</code> 文件</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="meta">#!/bin/sh</span></span><br><span class="line">. <span class="string">&quot;<span class="subst">$(dirname <span class="string">&quot;<span class="variable">$0</span>&quot;</span>)</span>/_/husky.sh&quot;</span></span><br><span class="line"></span><br><span class="line">npx --no-install commitlint --edit <span class="variable">$1</span></span><br></pre></td></tr></table></figure></article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta">文章作者: </span><span class="post-copyright-info"><a href="http://example.com">Radical</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta">文章链接: </span><span class="post-copyright-info"><a href="http://example.com/2022/09/04/%E5%89%8D%E7%AB%AF%E7%BC%96%E7%A8%8B%E8%A7%84%E8%8C%83%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88/">http://example.com/2022/09/04/%E5%89%8D%E7%AB%AF%E7%BC%96%E7%A8%8B%E8%A7%84%E8%8C%83%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta">版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="http://example.com" target="_blank">RadicalFive</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"></div><div class="post_share"><div class="social-share" data-image="https://ossstored.oss-cn-shanghai.aliyuncs.com/bg/1efbb55e880711ebb6edd017c2d2eca2.jpg" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><div class="next-post pull-full"><a href="/2022/09/04/hello-world%20-%20%E5%89%AF%E6%9C%AC/"><img class="next-cover" src="https://ossstored.oss-cn-shanghai.aliyuncs.com/bg/1efbb55e880711ebb6edd017c2d2eca2.jpg" onerror="onerror=null;src='/img/404.jpg'" alt="cover of next post"><div class="pagination-info"><div class="label">下一篇</div><div class="next_info">Hello World</div></div></a></div></nav></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="is-center"><div class="avatar-img"><img src="https://ossstored.oss-cn-shanghai.aliyuncs.com/avatar-boy/11.jpg" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info__name">Radical</div><div class="author-info__description">请用绝对的理智，去压制不该有的情绪</div></div><div class="card-info-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">2</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">0</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">0</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/Radicalfive"><i class="fab fa-github"></i><span>Follow Me</span></a></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>公告</span></div><div class="announcement_content">明知不可为而为之是最大的诚意</div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%89%8D%E7%AB%AF%E7%BC%96%E7%A8%8B%E8%A7%84%E8%8C%83%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88"><span class="toc-number">1.</span> <span class="toc-text">前端编程规范解决方案</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%BA%E4%BB%80%E4%B9%88%E9%9C%80%E8%A6%81%E7%BC%96%E7%A8%8B%E8%A7%84%E8%8C%83%EF%BC%9F"><span class="toc-number">1.1.</span> <span class="toc-text">为什么需要编程规范？</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%BC%96%E7%A8%8B%E8%A7%84%E8%8C%83%E4%B8%80%EF%BC%9A%E4%BB%A3%E7%A0%81%E6%A3%80%E6%B5%8B%E5%B7%A5%E5%85%B7ESLint"><span class="toc-number">1.2.</span> <span class="toc-text">编程规范一：代码检测工具ESLint</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%BC%96%E7%A8%8B%E8%A7%84%E8%8C%83%E4%BA%8C%EF%BC%9A%E4%BB%A3%E7%A0%81%E6%A0%BC%E5%BC%8F%E5%B7%A5%E5%85%B7Prettier"><span class="toc-number">1.3.</span> <span class="toc-text">编程规范二：代码格式工具Prettier</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#ESLint%E4%B8%8EPrettier%E9%85%8D%E5%90%88%E8%A7%A3%E5%86%B3%E4%BB%A3%E7%A0%81%E6%A0%BC%E5%BC%8F%E9%97%AE%E9%A2%98"><span class="toc-number">1.3.1.</span> <span class="toc-text">ESLint与Prettier配合解决代码格式问题</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%BC%96%E7%A8%8B%E8%A7%84%E8%8C%83%E4%B8%89%EF%BC%9A%E7%BA%A6%E5%AE%9A%E5%BC%8F%E6%8F%90%E4%BA%A4%E8%A7%84%E8%8C%83"><span class="toc-number">1.4.</span> <span class="toc-text">编程规范三：约定式提交规范</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Commitizen%E5%B8%AE%E5%8A%A9%E6%88%91%E4%BB%AC%E8%A7%84%E8%8C%83%E5%8C%96%E6%8F%90%E4%BA%A4%E4%BB%A3%E7%A0%81"><span class="toc-number">1.4.1.</span> <span class="toc-text">Commitizen帮助我们规范化提交代码</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AD%A6%E4%B9%A0%E4%BD%BF%E7%94%A8-Git-Hooks"><span class="toc-number">1.4.2.</span> <span class="toc-text">学习使用 Git Hooks </span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BD%BF%E7%94%A8husky-commitlint%E6%A3%80%E6%9F%A5%E6%8F%90%E4%BA%A4%E6%8F%8F%E8%BF%B0%E6%98%AF%E5%90%A6%E7%AC%A6%E5%90%88%E8%A7%84%E8%8C%83%E8%A6%81%E6%B1%82"><span class="toc-number">1.4.3.</span> <span class="toc-text">使用husky+commitlint检查提交描述是否符合规范要求</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%80%9A%E8%BF%87pre-commit%E6%A3%80%E6%B5%8B%E6%8F%90%E4%BA%A4%E6%97%B6%E4%BB%A3%E7%A0%81%E8%A7%84%E8%8C%83"><span class="toc-number">1.4.4.</span> <span class="toc-text">通过pre-commit检测提交时代码规范</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#lint-staged%E8%87%AA%E5%8A%A8%E4%BF%AE%E5%A4%8D%E6%A0%BC%E5%BC%8F%E9%94%99%E8%AF%AF"><span class="toc-number">1.4.5.</span> <span class="toc-text">lint-staged自动修复格式错误</span></a></li></ol></li></ol></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item"><a class="thumbnail" href="/2022/09/04/%E5%89%8D%E7%AB%AF%E7%BC%96%E7%A8%8B%E8%A7%84%E8%8C%83%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88/" title="无题"><img src="https://ossstored.oss-cn-shanghai.aliyuncs.com/bg/1efbb55e880711ebb6edd017c2d2eca2.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="无题"/></a><div class="content"><a class="title" href="/2022/09/04/%E5%89%8D%E7%AB%AF%E7%BC%96%E7%A8%8B%E8%A7%84%E8%8C%83%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88/" title="无题">无题</a><time datetime="2022-09-04T11:51:54.160Z" title="发表于 2022-09-04 19:51:54">2022-09-04</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2022/09/04/hello-world%20-%20%E5%89%AF%E6%9C%AC/" title="Hello World"><img src="https://ossstored.oss-cn-shanghai.aliyuncs.com/bg/1efbb55e880711ebb6edd017c2d2eca2.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="Hello World"/></a><div class="content"><a class="title" href="/2022/09/04/hello-world%20-%20%E5%89%AF%E6%9C%AC/" title="Hello World">Hello World</a><time datetime="2022-09-04T11:24:04.019Z" title="发表于 2022-09-04 19:24:04">2022-09-04</time></div></div></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2020 - 2022 By Radical</div><div class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><button id="go-up" type="button" title="回到顶部"><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox.umd.min.js"></script><script src="https://cdn.jsdelivr.net/npm/node-snackbar/dist/snackbar.min.js"></script><div class="js-pjax"></div><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div></body></html>
